@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import styled, { ThemeContext } from "styled-components";
 import { PortfolioContext } from "../contexts/PortfolioContext";
 import ThemeSwitcher from "./ThemeSwitcher";
@@ -7,6 +8,7 @@ export const Header = () => {
 
   return (
     <Container>
+      <nav><Link to="/">Home</Link> - <Link to="/projects">Projects</Link> - <a href="#">Say Hi!</a></nav>
       <ThemeSwitcher />
     </Container>
   );
@@ -22,6 +24,8 @@ const Container = styled.header`
   background: ${(props) => props.theme.bodyDarker};
   position: fixed;
   top: 0;
+  z-index: 100;
+
 `;
 
 // const HomeLink = styled.h2`
