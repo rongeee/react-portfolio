@@ -9,6 +9,7 @@ export const darkTheme = {
   body: "#363537",
   bodyDarker: "#232323",
   text: "#FAFAFA",
+  textInactive: "#afafaf",
   toggleBorder: "#6B8096",
   gradient: "linear-gradient(#091236, #1E215D)",
 };

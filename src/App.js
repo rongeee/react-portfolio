@@ -14,12 +14,10 @@ function App() {
       enter: { opacity: '1',  transform: "translateX(0%)" },
       leave: { opacity: '0', transform: "translateX(-100%)" }
   });
-  return transitions.map(({ item: location, props, key }) => (
-    
-      
-    
-    <Layout>
-    <animated.div
+  return (
+  <Layout>
+  { transitions.map(({ item: location, props, key }) => 
+     (<animated.div
       key={key}
       style={{
         ...props,
@@ -37,11 +35,12 @@ function App() {
         <Route path="/projects" exact component={Projects} />
         <Route path="/" exact component={Hero} />
     </Switch>
-    </animated.div>
-        </Layout>
+    </animated.div>)
 
 
-  ));
+  )}
+    </Layout>
+  );
 }
 
 export default App;

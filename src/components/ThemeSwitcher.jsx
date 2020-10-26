@@ -8,7 +8,6 @@ const ThemeSwitcher = () => {
   const setTheme = useContext(PortfolioContext).setDTheme;
   const currTheme = useContext(PortfolioContext).dTheme;
   const themeColors = useContext(ThemeContext);
-  console.log(themeColors);
 
   return (
     <Root>
@@ -71,4 +70,6 @@ const Root = styled.div`
     width: 200px;
     padding: 30px;
   }
+  position: absolute;
+  right: 0;
 `;
