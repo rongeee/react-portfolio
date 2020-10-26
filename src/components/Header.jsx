@@ -10,9 +10,12 @@ export const Header = () => {
   const [activePage, setActivePage] = useState(null);
   const [animClass, setAnimClass] = useState("");
 
+  const { setDirection } = useContext(PortfolioContext);
+
   const pathArray = [
     { path: "/", name: "Home" },
     { path: "/projects", name: "Projects" },
+    { path: "/skills", name: "Skills" },
     { path: "/contact", name: "Say Hi!" },
   ];
 
@@ -24,24 +27,34 @@ export const Header = () => {
       case "/projects":
         setActivePage(1);
         break;
-      case "/contact":
+      case "/skills":
         setActivePage(2);
+        break;
+      case "/contact":
+        setActivePage(3);
     }
   }, []);
 
   const handleClick = (i) => {
+    // KOLLA SKILLNADEN ISTÄLLET && STÖRRE/MINDRE
     setActivePage((prevState) => {
       if (prevState === 1 && i === 2) {
         setAnimClass("forward after");
+        setDirection("forward");
       } else if (prevState === 2 && i === 1) {
         setAnimClass("back after");
+        setDirection("back");
       } else if (prevState === 1 && i === 0) {
+        setDirection("back");
         setAnimClass("back before");
       } else if (prevState === 0 && i === 1) {
+        setDirection("forward");
         setAnimClass("forward before");
       } else if (prevState === 2 && i === 0) {
+        setDirection("back");
         setAnimClass("back two");
       } else if (prevState === 0 && i === 2) {
+        setDirection("forward");
         setAnimClass("forward two");
       }
       return i;
@@ -52,18 +65,34 @@ export const Header = () => {
     <Container>
       <StyledNav>
         {pathArray.map((item, index) => {
-          return (
-            <StyledNavLink
-              exact
-              to={item.path}
-              onClick={() => handleClick(index)}
-              key={index}
-              activeClassName="active"
-              className={index === 1 ? animClass + " projs" : ""}
-            >
-              {item.name}
-            </StyledNavLink>
-          );
+          if (index !== pathArray.length - 1) {
+            return (
+              <StyledNavLink
+                exact
+                to={item.path}
+                onClick={() => handleClick(index)}
+                key={index}
+                activeClassName="active"
+                className={index === 1 ? animClass + " projs" : ""}
+                className="element"
+              >
+                {item.name}
+              </StyledNavLink>
+            );
+          } else {
+            return (
+              <StyledNavLink
+                exact
+                to={item.path}
+                onClick={() => handleClick(index)}
+                key={index}
+                activeClassName="active"
+                className={index === 1 ? animClass + " projs" : ""}
+              >
+                {item.name}
+              </StyledNavLink>
+            );
+          }
         })}
       </StyledNav>
       <ThemeSwitcher />
@@ -103,8 +132,7 @@ const StyledNavLink = styled(NavLink)`
     color: ${(props) => props.theme.text};
   }
 
-  &.projs {
-    &::before,
+  &.element {
     &::after {
       content: "";
       height: 1px;
